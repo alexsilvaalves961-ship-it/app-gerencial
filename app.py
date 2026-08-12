@@ -2,39 +2,38 @@ import os
 import gradio as gr
 
 # ==========================================
-# 1. SUA LÓGICA E FUNÇÕES PYTHON
+# 1. SUAS FUNÇÕES / LÓGICA DO PROGRAMA
 # ==========================================
-def minha_funcao(texto):
+def processar_dados(texto):
     if not texto:
-        return "Por favor, insira algum texto para processar."
-    return f"Resultado processado: {texto.upper()}"
+        return "Por favor, digite algo para testar."
+    return f"Processado com sucesso: {texto.upper()}"
 
 
 # ==========================================
-# 2. INTERFACE GRADIO
+# 2. CONSTRUÇÃO DA INTERFACE (GRADIO)
 # ==========================================
-with gr.Blocks(title="Painel Gerencial") as demo:
+with gr.Blocks(title="Sistema Gerencial") as demo:
     gr.Markdown("# 📊 Painel Gerencial")
-    gr.Markdown("Seja bem-vindo ao sistema. Preencha os campos abaixo para testar.")
+    gr.Markdown("Aplicação online pronta para testes.")
 
     with gr.Row():
-        entrada = gr.Textbox(label="Dados de Entrada", placeholder="Digite aqui...")
+        entrada = gr.Textbox(label="Entrada de Dados", placeholder="Digite aqui...")
         saida = gr.Textbox(label="Resultado", interactive=False)
 
-    botao = gr.Button("Processar", variant="primary")
-    botao.click(fn=minha_funcao, inputs=entrada, outputs=saida)
+    botao = gr.Button("Executar", variant="primary")
+    botao.click(fn=processar_dados, inputs=entrada, outputs=saida)
 
 
 # ==========================================
-# 3. CONFIGURAÇÃO DE SERVIDOR (OBRIGATÓRIO PARA O RENDER)
+# 3. INICIALIZAÇÃO OBRIGATÓRIA PARA O RENDER
 # ==========================================
-if __name__ == "__main__":
-    # O Render atribui uma porta dinâmica na variável PORT
-    port = int(os.environ.get("PORT", 7860))
+# Captura a porta dinâmica atribuída pelo Render (padrão 10000)
+port = int(os.environ.get("PORT", 10000))
 
-    # server_name "0.0.0.0" permite conexões externas do Render
-    demo.launch(
-        server_name="0.0.0.0",
-        server_port=port,
-        share=False  # Não use share=True no Render
-    )
+# Inicializa o servidor diretamente para garantir que o Render abra a porta
+demo.launch(
+    server_name="0.0.0.0",
+    server_port=port,
+    share=False
+)
