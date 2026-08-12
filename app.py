@@ -832,5 +832,10 @@ with gr.Blocks(theme=gr.themes.Soft(), title="Dashboard do Prêmio de Motoristas
 
 # Lançamento compatível com Cloud/Render/Spaces
 if __name__ == "__main__":
+    import os
     port = int(os.environ.get("PORT", 10000))
-    app.launch(server_name="0.0.0.0", server_port=port)
+    print(f"--- INICIANDO GRADIO NA PORTA {port} ---", flush=True)
+    app.launch(
+        server_name="0.0.0.0",
+        server_port=port,
+    )
