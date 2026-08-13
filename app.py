@@ -1078,8 +1078,10 @@ if __name__ == "__main__":
     port = int(os.environ.get("PORT", 10000))
     print(f"--- INICIANDO GRADIO NA PORTA {port} ---", flush=True)
     
+    # Ativa a fila do Gradio para manter o Proxy do Render estabilizado
+    app.queue()
+    
     app.launch(
         server_name="0.0.0.0",
-        server_port=port,
-        allowed_hosts=["*"]  # 👈 ADICIONE ESTA LINHA
+        server_port=port
     )
