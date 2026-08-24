@@ -1,4 +1,6 @@
-gradio>=4.44.0
 pandas
 openpyxl
-numpy
+gradio
+gspread
+oauth2client
+gspread-dataframe
